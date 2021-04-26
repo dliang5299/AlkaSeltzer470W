@@ -1,0 +1,39 @@
+---
+title: "EDA_plots"
+author: "Julia Trigg"
+output: html_document
+---
+
+```{r}
+as = read.csv("C:/Users/Julia/Downloads/ASdata.csv")
+names(as)[1] <- "Temp"
+```
+
+```{r}
+boxplot(Time~Temp, data=as, main="Relationship between Dissolving Time and Temperature")
+boxplot(Time~Liquid, data=as, main="Relationship between Dissolving Time and Liquid")
+boxplot(Time~Volume, data=as, main="Relationship between Dissolving Time and Volume")
+```
+
+```{r}
+interaction.plot(x.factor = as$Temp,
+                 trace.factor = as$Liquid,
+                 response = as$Time,
+                 ylab = "Time (seconds)",
+                 xlab = "Temperature",
+                 trace.label="Liquid")
+
+interaction.plot(x.factor = as$Temp,
+                 trace.factor = as$Volume,
+                 response = as$Time,
+                 ylab = "Time (seconds)",
+                 xlab = "Temperature",
+                 trace.label="Volume")
+
+interaction.plot(x.factor = as$Liquid,
+                 trace.factor = as$Volume,
+                 response = as$Time,
+                 ylab = "Time (seconds)",
+                 xlab = "Liquid",
+                 trace.label="Volume")
+```
