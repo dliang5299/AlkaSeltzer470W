@@ -5,8 +5,9 @@ output: html_document
 ---
 
 ```{r}
-as = read.csv("C:/Users/Julia/Downloads/ASdata.csv")
-names(as)[1] <- "Temp"
+library(readxl)
+as <- read_excel("Data/AlkaSeltzer_Results.xlsx")
+#names(as)[1] <- "Temp"
 ```
 
 ```{r}
