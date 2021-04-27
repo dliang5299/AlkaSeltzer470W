@@ -1,0 +1,61 @@
+---
+title: "ANOVA_models"
+author: "David Chen"
+date: "4/27/2021"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r}
+# Clear environment
+rm(list = ls())
+
+# Load packages
+library(readxl)
+library(tidyverse)   
+library(broom)      # For tidy() to make better anova summary
+library(knitr)      # For better tables
+
+# Read in data
+AS_raw <- read_excel("Data/AlkaSeltzer_Results.xlsx")
+
+
+# Global options
+
+```
+
+---
+
+# Data cleaning
+
+```{r}
+AS <-
+  AS_raw %>%
+  mutate(Volume = as.factor(Volume))
+```
+
+---
+
+
+# ANOVA model
+
+```{r}
+# Start with the full model with 2 and 3 way interactions
+full_aov <- 
+  aov(Time ~ Temp + Liquid + Volume + Temp:Liquid + Temp:Volume + Liquid:Volume + Temp:Liquid:Volume, 
+                data = AS)
+
+# Conduct the stepwise selection
+step_aov <- step(full_aov, trace = FALSE)
+```
+
+
+```{r}
+# Better anova summary table
+step_aov %>%
+  tidy() %>%
+  kable(digits = 3)
+```
+
+
