@@ -10,9 +10,10 @@ as <- read_excel("Data/AlkaSeltzer_Results.xlsx")
 ```
 
 ```{r}
-boxplot(Time~Temp, data=as, main="Relationship between Dissolving Time and Temperature")
-boxplot(Time~Liquid, data=as, main="Relationship between Dissolving Time and Liquid")
-boxplot(Time~Volume, data=as, main="Relationship between Dissolving Time and Volume")
+par(mfrow=c(1,3))
+boxplot(Time~Temp, data=as, main="Time vs. Temperature")
+boxplot(Time~Liquid, data=as, main="Time vs. Liquid")
+boxplot(Time~Volume, data=as, main="Time vs. Volume")
 ```
 
 ```{r}
