@@ -17,6 +17,7 @@ library(tidyverse)
 library(broom)      # For tidy() to make better anova summary
 library(knitr)      # For better tables
 
+
 # Read in data
 AS_raw <- read_excel("Data/AlkaSeltzer_Results.xlsx")
 
@@ -57,5 +58,51 @@ step_aov %>%
   tidy() %>%
   kable(digits = 3)
 ```
+
+
+# Residual Plots
+```{r}
+par(mfrow = c(1,3))
+plot(step_aov)
+
+```
+
+
+
+---
+
+## Tukey Comparisons
+
+```{r}
+TukeyHSD(step_aov, "Temp", conf.level = 0.95) 
+
+TukeyHSD(step_aov, "Liquid", conf.level = 0.95)
+```
+
+```{r}
+TukeyHSD(step_aov, "Temp", conf.level = 0.95) %>%
+  tidy() %>%
+  select(-null.value) %>%
+  kable(digits = 2) 
+
+TukeyHSD(step_aov, "Liquid", conf.level = 0.95) %>%
+  tidy() %>%
+  select(-null.value) %>%
+  kable(digits = 2)
+```
+
+
+
+
+
+Tukey plots
+
+```{r}
+plot(TukeyHSD(step_aov, "Temp", conf.level = 0.95)) 
+
+plot(TukeyHSD(step_aov, "Liquid", conf.level = 0.95))
+```
+
+
 
 
