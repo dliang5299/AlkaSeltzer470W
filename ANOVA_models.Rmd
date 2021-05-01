@@ -17,13 +17,8 @@ library(tidyverse)
 library(broom)      # For tidy() to make better anova summary
 library(knitr)      # For better tables
 
-
 # Read in data
 AS_raw <- read_excel("Data/AlkaSeltzer_Results.xlsx")
-
-
-# Global options
-
 ```
 
 ---
