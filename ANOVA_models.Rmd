@@ -55,6 +55,15 @@ step_aov %>%
 ```
 
 
+```{r}
+# Predictions using the optimal fator levels
+preds <- data.frame(Temp = "Room", Liquid = "Water")
+predict(m, newdata = preds)
+
+```
+
+
+
 # Residual Plots
 ```{r}
 par(mfrow = c(1,3))
