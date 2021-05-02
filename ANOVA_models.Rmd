@@ -83,29 +83,17 @@ TukeyHSD(step_aov, "Liquid", conf.level = 0.95)
 ```
 
 ```{r}
-TukeyHSD(step_aov, "Temp", conf.level = 0.95) %>%
+Temp_Tukey <-
+  TukeyHSD(step_aov, "Temp", conf.level = 0.95) %>%
   tidy() %>%
-  select(-null.value) %>%
-  kable(digits = 2) 
+  select(-null.value) 
 
-TukeyHSD(step_aov, "Liquid", conf.level = 0.95) %>%
+Liquid_Tukey <- 
+  TukeyHSD(step_aov, "Liquid", conf.level = 0.95) %>%
   tidy() %>%
-  select(-null.value) %>%
-  kable(digits = 2)
+  select(-null.value)
+
+rbind(Temp_Tukey, Liquid_Tukey) %>%
+  kable(digits = 3)
 ```
-
-
-
-
-
-Tukey plots
-
-```{r}
-plot(TukeyHSD(step_aov, "Temp", conf.level = 0.95)) 
-
-plot(TukeyHSD(step_aov, "Liquid", conf.level = 0.95))
-```
-
-
-
 
